@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${title}"></title>
+  </head>
+  <body>
+    <h1 th:text="${title}"></h1>
+    <ul>
+      <li th:text="${user.name}"></li>
+      <li th:text="${user.lastname}"></li>
+      <li th:if="${user.email}" th:text="${user.email}"></li>
+      <!-- Mostrar email sólo cuando exista -->
+      <li
+        th:if="${user.email == null}"
+        th:text="${'Este usuario no tiene email'}"
+      ></li>
+      <!-- Mostrar mensaje cuando NO exista email -->
+    </ul>
+    <!-- Con Requestparam -->
+    <a th:href="@{/list}">Ver listado</a>
+
+    <!-- Con RequestParam enviando menssage -->
+    <a th:href="@{/api/params/foo?message=Hola que tal gente}">Ver mensaje</a>
+    <a th:href="@{/api/params/foo(message='Hola que tal gente 2')}"
+      >Ver mensaje 2</a
+    >
+    <a th:href="@{/api/params/foo(message=${title})}">Ver mensaje 3</a>
+
+    <!-- Varios param en RequestParam -->
+    <a th:href="@{/api/params/bar(text='Hola que tal bar', code=123456)}"
+      >Ver bar</a
+    >
+    <!-- Con PathVariable -->
+    <a th:href="@{api/var/vaz/Hola parte variable}">Ver path variable</a>
+    <a th:href="@{'api/var/vaz/' + ${title}}">Ver path variable con title</a>
+  </body>
+</html>

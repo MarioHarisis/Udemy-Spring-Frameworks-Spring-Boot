@@ -1,0 +1,10 @@
+com\curso\springboot\springboot_web\models\dto\ParamDto.class
+com\curso\springboot\springboot_web\controllers\PathVariableController.class
+com\curso\springboot\springboot_web\controllers\UserController.class
+com\curso\springboot\springboot_web\controllers\UserRestController.class
+com\curso\springboot\springboot_web\SpringbootWebApplication.class
+com\curso\springboot\springboot_web\controllers\RequestParamController.class
+com\curso\springboot\springboot_web\models\User.class
+com\curso\springboot\springboot_web\controllers\HomeController.class
+com\curso\springboot\springboot_web\models\dto\UserDto.class
+com\curso\utils\loggerUtils.class
