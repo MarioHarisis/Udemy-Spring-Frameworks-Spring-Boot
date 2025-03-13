@@ -1,0 +1,89 @@
+<h2 class="mt-3">Formulario de productos</h2>
+<div class="container col-6 mt-3">
+  <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+    <!-- método definido en form.component.ts -->
+    <div>
+      <input
+        class="form-control my-2"
+        type="text"
+        name="name"
+        placeholder="Name"
+        [(ngModel)]="product.name"
+        #name="ngModel"
+        required
+        minlength="5"
+      />
+      <!-- 
+      - invalid: Si el campo tiene errores de validación (required, minlength, maxlength, etc.), invalid será true, 
+      de lo contrario será false
+
+      - dirty: Se vuelve true tan pronto como el usuario escribe o borra algo en el campo.
+      Si el campo nunca ha sido modificado, sigue siendo false
+
+      - touched: Es true si el usuario hizo clic en el campo y luego salió de él sin modificarlo.
+      -->
+      <div class="alert alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+        <!-- name.errors!['required'] verifica si el campo price tiene un error de validación required y
+        si ese error está presente en el objeto errors de ese control. 
+        
+        El operador ! se utiliza en TypeScript para asegurar que la expresión no es null ni undefined. 
+        Este operador es conocido como "Non-null assertion operator" y le indica a TypeScript que, 
+        aunque price.errors podría ser null o undefined, tú estás seguro de que no lo será en ese contexto.
+        
+        En este caso, te está indicando que price.errors no será null o undefined en el momento de 
+        la evaluación de esa expresión.
+        -->
+        <div *ngIf="name.errors!['required']">Nombre requerido!</div>
+        <div *ngIf="name.errors!['minlength']">Nombre debe tener al menos 5 carácteres!</div>
+      </div>
+    </div>
+
+    <div>
+      <input
+        class="form-control my-2"
+        type="text"
+        name="description"
+        placeholder="Description"
+        [(ngModel)]="product.description"
+        #description="ngModel"
+        required
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="description.invalid && (description.dirty || description.touched)"
+      >
+        @if (description.errors!['required']) {
+        <div>Descripción requerida!</div>
+        }
+      </div>
+    </div>
+
+    <div>
+      <input
+        class="form-control my-2"
+        type="number"
+        name="price"
+        placeholder="Price"
+        [(ngModel)]="product.price"
+        #price="ngModel"
+        required
+        min="5"
+      />
+      <div class="alert alert-danger" *ngIf="price.invalid && (price.dirty || price.touched)">
+        @if(price.errors!['required']) {
+        <div>Precio requerido!</div>
+        } @if (price.errors!['min']) {
+        <div>El precio debe ser al menos 5</div>
+        }
+      </div>
+    </div>
+    <div>
+      <!-- deshabilitar el botón crear en caso de que productForm NO sea válido -->
+      <button [disabled]="!productForm.form.valid" type="submit" class="btn btn-primary my-2">
+        {{ product.id > 0 ? "Update" : "Create" }}
+        <!-- alternar entre Update y create según si se ha seleccionado producto o no -->
+      </button>
+      <button type="button" class="btn btn-secondary mx-2" (click)="cleanProduct()">Clean</button>
+    </div>
+  </form>
+</div>
