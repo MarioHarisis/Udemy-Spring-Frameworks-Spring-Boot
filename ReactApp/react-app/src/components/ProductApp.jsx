@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { listProduct } from "../services/ProductService"; // importamos la lista de productos
+import { ProductGrid } from "./ProductGrid";
 /*
 export const → Exporta el componente para poder usarlo en otros archivos.
 ProductApp → Es una función que representa un componente en React.
@@ -29,49 +30,31 @@ export const ProductApp = () => {
     }, []);
 
     /* 
-    ¿ Por qué usar map()?
-    En React, usamos .map() en lugar de .forEach() porque .map() devuelve un nuevo array, 
-    mientras que .forEach() no devuelve nada.
 
-    ¿ Por qué especificamos la key? 
+    ¿Qué es una "prop" en React?
 
-    Cuando el estado cambia, React re-renderiza solo los elementos que han cambiado, 
-    en lugar de volver a dibujar toda la lista. Si no especificamos una key, React 
-    no sabe cuál elemento es cuál, lo que puede causar problemas de rendimiento y errores inesperados.
+    En React, "props" (abreviatura de "properties") son la forma en que los componentes 
+    padres pueden pasar datos a los componentes hijos.
 
-    Si React detecta que un id ya existe, mantendrá el mismo elemento en el DOM.
-    Si se agrega o elimina un producto, React solo actualizará los elementos necesarios 
-    en lugar de renderizar toda la lista nuevamente.
+    - Son inmutables (no se pueden modificar dentro del componente que las recibe).
+    - Sirven para hacer componentes reutilizables al permitir personalizar su contenido.
+    - Se pasan como atributos de HTML en los componentes.
 
+    ¿Qué está pasando aquí?
+    
+    <ProductGrid /> es un componente hijo que estamos utilizando dentro de otro componente.
+
+    products={products} es una prop que se está pasando al componente ProductGrid.
+    - La primera products es el nombre de la prop.
+    - La segunda products es el estado que hemos definido en el componente padre con useState.
+
+    Es decir, ProductGrid está recibiendo la lista de productos como una prop, 
+    para luego mostrarla en su propio contenido. 
     */
     return (
         <>
         <h1>Hola mundo React!</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>name</th>
-                    <th>description</th>
-                    <th>price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {products.map(product => {
-                    return (
-                        /* Se usa key={product.name} para que React 
-                        identifique cada fila de manera única. 
-                        (lo mejor sería usar el id)*/
-                    <tr key={product.name}>
-
-                        <td>{product.name}</td>
-                        <td>{product.description}</td>
-                        <td>{product.price}</td>
-
-                    </tr>
-                    )
-                })}
-            </tbody>
-        </table>
+        <ProductGrid products={products}></ProductGrid>
         </>
     )
 }
