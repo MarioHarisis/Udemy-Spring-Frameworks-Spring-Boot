@@ -5,6 +5,6 @@ import { ProductApp } from './components/ProductApp.jsx' // importar componente 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ProductApp />
+    <ProductApp title = {'Lista de productos'}/>
   </StrictMode>,
 )

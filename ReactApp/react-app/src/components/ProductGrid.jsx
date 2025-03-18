@@ -1,5 +1,5 @@
+import PropTypes from "prop-types" // importación dependencia para poder usar propTypes
 import { ProductDetail } from "./ProductDetail"
-
 export const ProductGrid = ( {products = []} ) => {
 
     /* 
@@ -52,4 +52,16 @@ export const ProductGrid = ( {products = []} ) => {
             </tbody>
         </table>
     )
+}
+/*
+¿Por qué usar PropTypes?
+- Ayuda a detectar errores en tiempo de desarrollo.
+- Hace que el código sea más claro sobre qué tipo de datos espera un componente.
+- Evita bugs al pasar props incorrectas.
+*/
+
+// Define qué tipo de datos debe recibir ProductGrid en sus props.
+ProductGrid.propTypes = {
+    // Indica que products debe ser un array y es obligatorio (isRequired)
+    products: PropTypes.array.isRequired
 }
