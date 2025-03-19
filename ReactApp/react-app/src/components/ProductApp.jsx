@@ -17,6 +17,20 @@ export const ProductApp = ({title}) => {
     */
     const [products, setProducts] = useState([]);
 
+
+    const [productSelected, setProductSelected] = useState({
+        /*
+        Aquí estamos usando el hook useState para crear una variable de estado y su función para actualizarla.
+        - productSelected almacena el producto actualmente seleccionado.
+        - setProductSelected es la función que se usa para actualizar el estado.
+        */
+        id: 0,
+        name: '',
+        description: '',
+        price: ''
+    });
+
+
     useEffect(() => {
         /* 
         En este caso, estamos utilizando useEffect para hacer una llamada a 
@@ -53,15 +67,39 @@ export const ProductApp = ({title}) => {
         El resultado es una nueva lista de productos que incluye todos los productos anteriores 
         (usando el operador ...products) y el nuevo producto (pasado como argumento a la función) al final. 
         */
-        setProducts([...products, {...product}]);
+
+        if (product.id > 0) { // si el producto existe
+
+            setProducts(products.map(prod => {
+
+                if(prod.id == product.id){ // si contienne el mismo id
+                    return {...product}; // Actualiza el producto
+                }
+                return prod; // devuelve el mismo
+            }))
+
+        }else {
+            // Agrega el nuevo producto con id único
+            setProducts([...products, {...product, id: new Date().getTime()}]);
+        }
     }
 
-    const handlerRemoveProduct = (name) => {
-        console.log(name);
-        setProducts(products.filter(prod=> prod.name != name));
+    const handlerRemoveProduct = (id) => { // parámetro name producto que queremos eliminar
+        console.log('Product ID "'+ id + '" removed');
+        // recorre products elimina el name que sí coincida.
+        setProducts(products.filter(prod=> prod.id != id));
         
     }
 
+    const handlerProductSelected = (product) => {
+        /*
+            El estado productSelected cambia en el momento en que se ejecuta setProductSelected({...product}), 
+            es decir, cuando se llama a handlerProductSelected(product)
+
+            Al hacer { ...product }, creamos un nuevo objeto en memoria, evitando modificar el objeto original.
+        */
+        setProductSelected({...product});
+    }
 
 
     /* 
@@ -88,8 +126,8 @@ export const ProductApp = ({title}) => {
     return (
         <>
             <h1>{title}</h1>
-            <ProductForm handlerAdd = {handlerAddProduct}/>
-            <ProductGrid products={products} handlerRemove={handlerRemoveProduct}/>
+            <ProductForm handlerAdd = {handlerAddProduct} productSelected={productSelected}/>
+            <ProductGrid products={products} handlerRemove={handlerRemoveProduct} handlerSelected={handlerProductSelected}/>
         </>
     )
 }

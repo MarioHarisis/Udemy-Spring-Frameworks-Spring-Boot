@@ -1,13 +1,21 @@
 import PropTypes from "prop-types"
 
-export const ProductDetail = ({handlerRemove, product = {} }) => {
+export const ProductDetail = ({handlerSelected ,handlerRemove, product = {} }) => {
     return(
                     <tr>
+                        <td>{product.id}</td>
                         <td>{product.name}</td>
                         <td>{product.description}</td>
                         <td>{product.price}</td>
-                        <td>
-                            <button onClick={() => {handlerRemove(product.name)}}>
+                        <td>{
+                        /*Se ejecuta handlerSelected(product), pasando el producto de la fila seleccionada.*/}
+                            <button onClick={() => {handlerSelected(product)}}>
+                                Update
+                            </button>
+                        </td>
+                        <td>{
+                            /*Se ejecuta handlerSelected(product), pasando el id producto de la fila seleccionada.*/}
+                            <button onClick={() => {handlerRemove(product.id)}}>
                                 Remove
                             </button>
                         </td>
@@ -26,5 +34,6 @@ export const ProductDetail = ({handlerRemove, product = {} }) => {
 ProductDetail.propTypes = {
     // Indica que product debe ser un object y es obligatorio (isRequired)
     product: PropTypes.object.isRequired,
-    handlerRemove: PropTypes.func.isRequired
+    handlerRemove: PropTypes.func.isRequired,
+    handlerSelected: PropTypes.func.isRequired
 }

@@ -1,13 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 
 const initialDataForm = {
+    id:0,
     name: '',
     description: '',
     price: ''
 }
 
-export const ProductForm = ({handlerAdd}) => {
+export const ProductForm = ({ productSelected ,handlerAdd }) => {
 
     const [form, setForm] = useState(initialDataForm);
 
@@ -21,6 +22,14 @@ export const ProductForm = ({handlerAdd}) => {
     const price = form.price; 
     */
     const {name, description, price} = form;
+
+
+    useEffect(() => {
+        /*
+        usamos un useEffect para sincronizar el formulario con el producto seleccionado
+        */
+        setForm(productSelected);
+    }, [productSelected]); // Cuando productSelected cambia, se ejecuta el useEffect()
 
     return(
         <form onSubmit={(event) => {
@@ -75,7 +84,7 @@ export const ProductForm = ({handlerAdd}) => {
             })}
             />
             <button type="submit">
-                Enviar
+                Save
             </button>
         </form>
     )
