@@ -1,11 +1,16 @@
 import PropTypes from "prop-types"
 
-export const ProductDetail = ( {product = {}} ) => {
+export const ProductDetail = ({handlerRemove, product = {} }) => {
     return(
                     <tr>
                         <td>{product.name}</td>
                         <td>{product.description}</td>
                         <td>{product.price}</td>
+                        <td>
+                            <button onClick={() => {handlerRemove(product.name)}}>
+                                Remove
+                            </button>
+                        </td>
                     </tr>
     )
 }
@@ -20,5 +25,6 @@ export const ProductDetail = ( {product = {}} ) => {
 // Define qué tipo de datos debe recibir ProductDetail en sus props.
 ProductDetail.propTypes = {
     // Indica que product debe ser un object y es obligatorio (isRequired)
-    product: PropTypes.object.isRequired
+    product: PropTypes.object.isRequired,
+    handlerRemove: PropTypes.func.isRequired
 }

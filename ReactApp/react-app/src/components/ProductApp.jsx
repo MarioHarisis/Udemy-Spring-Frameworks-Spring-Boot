@@ -56,6 +56,14 @@ export const ProductApp = ({title}) => {
         setProducts([...products, {...product}]);
     }
 
+    const handlerRemoveProduct = (name) => {
+        console.log(name);
+        setProducts(products.filter(prod=> prod.name != name));
+        
+    }
+
+
+
     /* 
     ¿Qué es una "prop" en React?
 
@@ -81,7 +89,7 @@ export const ProductApp = ({title}) => {
         <>
             <h1>{title}</h1>
             <ProductForm handlerAdd = {handlerAddProduct}/>
-            <ProductGrid products={products}></ProductGrid>
+            <ProductGrid products={products} handlerRemove={handlerRemoveProduct}/>
         </>
     )
 }

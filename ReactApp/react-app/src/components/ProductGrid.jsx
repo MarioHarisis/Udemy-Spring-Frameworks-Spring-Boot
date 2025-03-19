@@ -1,6 +1,6 @@
 import PropTypes from "prop-types" // importación dependencia para poder usar propTypes
 import { ProductDetail } from "./ProductDetail"
-export const ProductGrid = ( {products = []} ) => {
+export const ProductGrid = ({handlerRemove, products = [] }) => {
 
     /* 
     ¿ Por qué usar map()?
@@ -26,6 +26,7 @@ export const ProductGrid = ( {products = []} ) => {
                     <th>name</th>
                     <th>description</th>
                     <th>price</th>
+                    <th>remove</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +47,7 @@ export const ProductGrid = ( {products = []} ) => {
                     de elementos que devuelve ProductDetail (incluyendo todos sus <tr>).
                     */
                     return (
-                        <ProductDetail product = {product} key={product.name}/>
+                        <ProductDetail handlerRemove={handlerRemove}  product={product} key={product.name}/>
                     )
                 })}
             </tbody>
@@ -63,5 +64,6 @@ export const ProductGrid = ( {products = []} ) => {
 // Define qué tipo de datos debe recibir ProductGrid en sus props.
 ProductGrid.propTypes = {
     // Indica que products debe ser un array y es obligatorio (isRequired)
-    products: PropTypes.array.isRequired
+    products: PropTypes.array.isRequired,
+    handlerRemove:PropTypes.func.isRequired
 }
