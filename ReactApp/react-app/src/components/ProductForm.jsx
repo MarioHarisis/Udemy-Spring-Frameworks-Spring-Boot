@@ -21,7 +21,7 @@ export const ProductForm = ({ productSelected ,handlerAdd }) => {
     const description = form.description;
     const price = form.price; 
     */
-    const {name, description, price} = form;
+    const {id, name, description, price} = form;
 
 
     useEffect(() => {
@@ -58,6 +58,7 @@ export const ProductForm = ({ productSelected ,handlerAdd }) => {
             */}
             <input 
             placeholder="Name"
+            className="form-control my-3 w-75"
             name="name"
             value={name} 
             onChange={(event) => setForm({
@@ -65,7 +66,8 @@ export const ProductForm = ({ productSelected ,handlerAdd }) => {
                 name: event.target.value
             })}
             />
-            <input 
+            <input
+            className="form-control my-3 w-75"
             placeholder="Description"
             name="description"
             value={description} 
@@ -74,7 +76,8 @@ export const ProductForm = ({ productSelected ,handlerAdd }) => {
                 description: event.target.value
             })}
             />
-            <input 
+            <input
+            className="form-control my-3 w-75"
             placeholder="Price"
             name="price"
             value={price}
@@ -83,8 +86,8 @@ export const ProductForm = ({ productSelected ,handlerAdd }) => {
                 price: event.target.value
             })}
             />
-            <button type="submit">
-                Save
+            <button className="btn btn-primary" type="submit">
+                {id> 0 ? 'Update' : 'Create'}
             </button>
         </form>
     )

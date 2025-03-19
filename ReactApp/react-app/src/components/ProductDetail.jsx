@@ -3,19 +3,18 @@ import PropTypes from "prop-types"
 export const ProductDetail = ({handlerSelected ,handlerRemove, product = {} }) => {
     return(
                     <tr>
-                        <td>{product.id}</td>
                         <td>{product.name}</td>
                         <td>{product.description}</td>
                         <td>{product.price}</td>
                         <td>{
                         /*Se ejecuta handlerSelected(product), pasando el producto de la fila seleccionada.*/}
-                            <button onClick={() => {handlerSelected(product)}}>
+                            <button className="btn btn-secondary btn-sm" onClick={() => {handlerSelected(product)}}>
                                 Update
                             </button>
                         </td>
                         <td>{
                             /*Se ejecuta handlerSelected(product), pasando el id producto de la fila seleccionada.*/}
-                            <button onClick={() => {handlerRemove(product.id)}}>
+                            <button className="btn btn-danger btn-sm" onClick={() => {handlerRemove(product.id)}}>
                                 Remove
                             </button>
                         </td>

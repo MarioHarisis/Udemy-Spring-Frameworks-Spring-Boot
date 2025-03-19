@@ -125,9 +125,21 @@ export const ProductApp = ({title}) => {
     */
     return (
         <>
-            <h1>{title}</h1>
-            <ProductForm handlerAdd = {handlerAddProduct} productSelected={productSelected}/>
-            <ProductGrid products={products} handlerRemove={handlerRemoveProduct} handlerSelected={handlerProductSelected}/>
+        <div className="container">
+            <h2>{title}</h2>
+            <div className="row">
+                <div className="col">
+                    <ProductForm handlerAdd = {handlerAddProduct} productSelected={productSelected}/>
+                </div>
+                <div>
+                    {
+                        products.length > 0 ? <ProductGrid products={products} handlerRemove={handlerRemoveProduct} handlerSelected={handlerProductSelected}/> :
+                        <div className="alert alert-warning">No hay productos en el sistema!</div>
+                    }
+                </div>
+            </div>
+
+        </div>
         </>
     )
 }

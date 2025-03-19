@@ -20,10 +20,9 @@ export const ProductGrid = ({handlerSelected ,handlerRemove, products = [] }) =>
     */
     return(
 
-        <table>
+        <table className="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>name</th>
                     <th>description</th>
                     <th>price</th>
