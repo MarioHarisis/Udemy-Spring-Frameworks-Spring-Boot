@@ -31,3 +31,47 @@ export const findAll = async () => {
   }
   return null;
 };
+
+// CREAR UN PRODUCTO
+export const create = async ({ name, description, price }) => {
+  try {
+    const response = await axios.post(baseUrl, {
+      /* 
+      ESTO SE PUEDE ABREVIAR CUANDO SE LLAMEN IGUAL
+      name: name,
+      description: description,
+      price: price */
+
+      name,
+      description,
+      price,
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+  return undefined;
+};
+
+// UPDATE DE PRODUCTO
+export const update = async ({ id, name, description, price }) => {
+  try {
+    // put() se utiliza para enviar datos a un servidor para actualizar un recurso existente
+    const response = await axios.put(`${baseUrl}/${id}`, {
+      // direccion referencia
+      /* 
+      ESTO SE PUEDE ABREVIAR CUANDO SE LLAMEN IGUAL
+      name: name,
+      description: description,
+      price: price */
+
+      name,
+      description,
+      price,
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+  return undefined;
+};
