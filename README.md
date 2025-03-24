@@ -1,4 +1,5 @@
 CURSO => Clases: 273 | Vídeo: 40,5 horas en total
+(todos los ejercicios comentados al detalle explicando la propia funcionalidad)
 
 - Inyección de dependencias Contenedor y contextos IoC
 - Anotaciones Spring MVC
