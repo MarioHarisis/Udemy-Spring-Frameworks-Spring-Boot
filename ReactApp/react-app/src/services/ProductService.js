@@ -46,11 +46,21 @@ export const create = async ({ name, description, price }) => {
       description,
       price,
     });
-    return response;
+    // Verifica que la respuesta no sea undefined o nula antes de retornarla
+    if (response && response.data) {
+      return response;
+    } else {
+      console.log("Respuesta vacía o inesperada del servidor");
+      return undefined;
+    }
   } catch (error) {
-    console.log(error);
+    // Maneja el error mostrando un mensaje más claro
+    console.error(
+      "Error en la solicitud POST:",
+      error.response ? error.response.data : error.message
+    );
+    return undefined;
   }
-  return undefined;
 };
 
 // UPDATE DE PRODUCTO
@@ -74,4 +84,13 @@ export const update = async ({ id, name, description, price }) => {
     console.log(error);
   }
   return undefined;
+};
+
+// ELIMINAR PRODUCTO
+export const remove = async (id) => {
+  try {
+    await axios.delete(`${baseUrl}/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
 };
