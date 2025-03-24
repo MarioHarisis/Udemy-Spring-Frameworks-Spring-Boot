@@ -2,6 +2,7 @@ package springboot.backend.backend_products.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import springboot.backend.backend_products.entities.Product;
 
@@ -17,6 +18,7 @@ import springboot.backend.backend_products.entities.Product;
  * PUT /products/{id}: Para actualizar un producto por su ID.
  * DELETE /products/{id}: Para eliminar un producto por su ID.
  */
+@CrossOrigin(origins = "http://localhost:5173") // conexion a Recat
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
 }
