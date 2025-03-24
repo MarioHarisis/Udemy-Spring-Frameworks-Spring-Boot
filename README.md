@@ -1,0 +1,14 @@
+- Inyección de dependencias Contenedor y contextos IoC
+- Anotaciones Spring MVC
+- Thymeleaf
+- RESTful
+- Formularios Validaciones Sesiones HTTP
+- Data JPA
+- Hibernate
+- Spring Security
+- JWT
+- React
+- Angular
+- Bootstrap CSS
+- JavaScript
+- despliegue en la nube AWS y mucho más.
