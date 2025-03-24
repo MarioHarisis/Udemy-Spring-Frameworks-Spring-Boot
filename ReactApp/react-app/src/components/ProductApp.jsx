@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { listProduct } from "../services/ProductService"; // importamos la lista de productos
+import { findAll, listProduct } from "../services/ProductService"; // importamos la lista de productos
 import { ProductGrid } from "./ProductGrid";
 import PropTypes from "prop-types";
 import { ProductForm } from "./ProductForm";
@@ -30,18 +30,41 @@ export const ProductApp = ({title}) => {
         price: ''
     });
 
+    // obtener la lista de productos
+    const getProducts = async () => {
+
+        const result = await findAll(); // findAll() definido en el ProductService
+
+        /*
+        setProducts actualizará el estado del componente con el valor de result, 
+        que es la lista de productos que se obtuvo. 
+
+        result.data accede al cuerpo de la respuesta, que generalmente contiene 
+        los datos reales que estamos buscando.
+
+        Dentro del objeto _embedded, se asume que existe una propiedad llamada 
+        products que contiene la lista de productos.
+        
+        Así que result.data._embedded.products accede a esa lista específica de productos 
+        que queremos utilizar.
+        */
+        setProducts(result.data._embedded.products); // prefijos del JSON
+    }
 
     useEffect(() => {
+        getProducts(); // simplemente obtenemos el resultado de la petición de GetProducts();
         /* 
         En este caso, estamos utilizando useEffect para hacer una llamada a 
         una función que recupera los productos y luego actualiza el estado de 
         products con el resultado. 
-        
+
+        CODIGO PREVIO SIMULACIÓN DE DB----------
+        const result = listProduct();
+        setProducts(result);
+        -----------------------------------------
         Dependencias vacías []: Hace que el efecto se ejecute solo una vez, 
         justo cuando el componente se monta.
         */
-        const result = listProduct();
-        setProducts(result);
     }, []);
 
 
