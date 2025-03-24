@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { create, findAll, listProduct, update } from "../services/ProductService"; // importamos la lista de productos
+import { create, findAll, listProduct, remove, update } from "../services/ProductService"; // importamos la lista de productos
 import { ProductGrid } from "./ProductGrid";
 import PropTypes from "prop-types";
 import { ProductForm } from "./ProductForm";
@@ -109,9 +109,10 @@ export const ProductApp = ({title}) => {
     }
 
     const handlerRemoveProduct = (id) => { // parámetro name producto que queremos eliminar
+        remove(id); // eliminar del backend
         console.log('Product ID "'+ id + '" removed');
         // recorre products elimina el name que sí coincida.
-        setProducts(products.filter(prod=> prod.id != id));
+        setProducts(products.filter(prod=> prod.id != id)); // eliminar en frontend
         
     }
 
