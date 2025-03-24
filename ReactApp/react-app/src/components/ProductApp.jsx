@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { findAll, listProduct } from "../services/ProductService"; // importamos la lista de productos
+import { create, findAll, listProduct, update } from "../services/ProductService"; // importamos la lista de productos
 import { ProductGrid } from "./ProductGrid";
 import PropTypes from "prop-types";
 import { ProductForm } from "./ProductForm";
@@ -68,7 +68,7 @@ export const ProductApp = ({title}) => {
     }, []);
 
 
-    const handlerAddProduct = (product) => {
+    const handlerAddProduct = async (product) => {
         /* 
         setProducts: Esta es la función que actualiza el estado products. 
         Usamos setProducts porque products es una variable de estado en un componente React, 
@@ -92,18 +92,19 @@ export const ProductApp = ({title}) => {
         */
 
         if (product.id > 0) { // si el producto existe
+           const response = await update(product); // update en backend
 
             setProducts(products.map(prod => {
-
-                if(prod.id == product.id){ // si contienne el mismo id
-                    return {...product}; // Actualiza el producto
+                if(prod.id == response.data.id){ // si contienne el mismo id
+                    return {...response.data}; // Actualiza el producto
                 }
                 return prod; // devuelve el mismo
             }))
 
         }else {
+            const response = await create(product);
             // Agrega el nuevo producto con id único
-            setProducts([...products, {...product, id: new Date().getTime()}]);
+            setProducts([...products, {...response.data}]);
         }
     }
 
