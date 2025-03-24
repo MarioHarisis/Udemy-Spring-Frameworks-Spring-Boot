@@ -1,6 +1,5 @@
-CURSO---------------------------------------------------
-Clases: 273 | Vídeo: 40,5 horas en total
---------------------------------------------------------
+CURSO => Clases: 273 | Vídeo: 40,5 horas en total
+
 - Inyección de dependencias Contenedor y contextos IoC
 - Anotaciones Spring MVC
 - Thymeleaf
