@@ -6,7 +6,7 @@
 - Data JPA
 - Hibernate
 - Spring Security
-- JWT
+- CRUD con Spring MVC, JPA y Seguridad JWT
 - React
 - Angular
 - Bootstrap CSS
