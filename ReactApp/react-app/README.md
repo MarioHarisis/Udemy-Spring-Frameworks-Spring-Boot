@@ -1,12 +1,7 @@
-# React + Vite
+This application is built with React for the frontend, connected to a Spring Boot backend also in this repository as "backend-products"(https://github.com/MarioHarisis/Udemy-Spring-Frameworks-Spring-Boot/tree/main/backend-products), and uses MySQL as the database for CRUD (Create, Read, Update, Delete) operations. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Users can interact with the frontend to perform various operations on product data, such as adding, updating, viewing, and deleting products. 
 
-Currently, two official plugins are available:
+The React app communicates with the Spring Boot API, which handles the business logic and interacts with the MySQL database for data persistence. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The backend is built using Spring Boot with RESTful APIs, and MySQL serves as the relational database to store the product information.
