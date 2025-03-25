@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import java.util.Arrays;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.LoggerFactory;
@@ -32,13 +33,22 @@ public class GreetingAspect {
      * (..) → Indica que puede recibir cualquier número de argumentos de cualquier
      * tipo.
      */
-    @Before("execution(String com.sprinboot.app.interceptor.springboot_aop.services.GreetingService.sayHello(..))") // PointCut
+    @Before("execution(* com.sprinboot.app.interceptor.springboot_aop.services.GreetingService.*(..))") // PointCut
     public void loggerBefore(JoinPoint joinPoint) { // JoinPoint → Representa el punto de ejecución del método
                                                     // interceptado
 
         String method = joinPoint.getSignature().getName(); // Obtiene el nombre del método interceptado.
         String args = Arrays.toString(joinPoint.getArgs()); // Obtiene los argumentos que se pasaron al
-                                                            // método.(sayHello(..))
+                                                            // método que sea ("*")
         logger.info("Antes: " + method + " con los argumentos " + args);
+    }
+
+    // se ejecuta después del método
+    @After("execution(* com.sprinboot.app.interceptor.springboot_aop.services.GreetingService.*(..))") // PointCut
+    public void loggerAfter(JoinPoint joinPoint) { // JoinPoint → Representa el punto de ejecución del método
+
+        String method = joinPoint.getSignature().getName(); // Obtiene el nombre del método interceptado.
+        String args = Arrays.toString(joinPoint.getArgs()); // Obtiene los argumentos que se pasaron al
+        logger.info("Despues: " + method + " con los argumentos " + args);
     }
 }
