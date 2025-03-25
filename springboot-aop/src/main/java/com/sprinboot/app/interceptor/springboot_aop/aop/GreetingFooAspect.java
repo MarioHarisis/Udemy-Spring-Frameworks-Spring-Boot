@@ -3,6 +3,7 @@ package com.sprinboot.app.interceptor.springboot_aop.aop;
 import java.util.Arrays;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -17,7 +18,15 @@ public class GreetingFooAspect {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Before("execution(* com.sprinboot.app.interceptor.springboot_aop.services.GreetingService.*(..))") // PointCut
+    @Before("GreetingServicePointCut.greetingFooLoggerPointCut()") // PointCut
+    public void loggerBefore(JoinPoint joinPoint) { // JoinPoint → Representa el punto de ejecución del método
+
+        String method = joinPoint.getSignature().getName(); // Obtiene el nombre del método interceptado.
+        String args = Arrays.toString(joinPoint.getArgs()); // Obtiene los argumentos que se pasaron al
+        logger.info("Antes Foo: " + method + " invocado con los parametros " + args);
+    }
+
+    @After("GreetingServicePointCut.greetingFooLoggerPointCut()") // PointCut
     public void loggerAfter(JoinPoint joinPoint) { // JoinPoint → Representa el punto de ejecución del método
 
         String method = joinPoint.getSignature().getName(); // Obtiene el nombre del método interceptado.

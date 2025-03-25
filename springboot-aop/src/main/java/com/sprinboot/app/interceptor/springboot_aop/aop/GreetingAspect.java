@@ -44,7 +44,7 @@ public class GreetingAspect {
      * (..) → Indica que puede recibir cualquier número de argumentos de cualquier
      * tipo.
      */
-    @Before("execution(* com.sprinboot.app.interceptor.springboot_aop.services.GreetingService.*(..))") // PointCut
+    @Before("execution(* com.sprinboot.app.interceptor.springboot_aop.services.GreetingServicePointCut.*(..))") // PointCut
     public void loggerBefore(JoinPoint joinPoint) { // JoinPoint → Representa el punto de ejecución del método
                                                     // interceptado
 
@@ -55,7 +55,7 @@ public class GreetingAspect {
     }
 
     // se ejecuta después del método SIEMPRE
-    @After("execution(* com.sprinboot.app.interceptor.springboot_aop.services.GreetingService.*(..))") // PointCut
+    @After("GreetingServicePointCut.greetingLoggerPointCut()") // PointCut
     public void loggerAfter(JoinPoint joinPoint) { // JoinPoint → Representa el punto de ejecución del método
 
         String method = joinPoint.getSignature().getName(); // Obtiene el nombre del método interceptado.
@@ -64,7 +64,7 @@ public class GreetingAspect {
     }
 
     // se ejecuta después de retornar método cuando NO ocurra ningún error
-    @AfterReturning("execution(* com.sprinboot.app.interceptor.springboot_aop.services.GreetingService.*(..))") // PointCut
+    @AfterReturning("GreetingServicePointCut.greetingLoggerPointCut()") // PointCut
     public void loggerAfterReturning(JoinPoint joinPoint) { // JoinPoint → Representa el punto de ejecución del método
 
         String method = joinPoint.getSignature().getName(); // Obtiene el nombre del método interceptado.
@@ -73,7 +73,7 @@ public class GreetingAspect {
     }
 
     // se ejecuta después del método si existe aluna excepción
-    @AfterThrowing("execution(* com.sprinboot.app.interceptor.springboot_aop.services.GreetingService.*(..))") // PointCut
+    @AfterThrowing("GreetingServicePointCut.greetingLoggerPointCut()") // PointCut
     public void loggerAfterThrowing(JoinPoint joinPoint) { // JoinPoint → Representa el punto de ejecución del método
 
         String method = joinPoint.getSignature().getName(); // Obtiene el nombre del método interceptado.
@@ -82,7 +82,7 @@ public class GreetingAspect {
     }
 
     // Advice que se ejecuta antes y después de la ejecución de un método
-    @Around("execution(* com.sprinboot.app.interceptor.springboot_aop.services.GreetingService.*(..))")
+    @Around("GreetingServicePointCut.greetingLoggerPointCut()")
     public Object loggerAround(ProceedingJoinPoint joinPoint) throws Throwable { // throws Throwable: Indica que puede
                                                                                  // lanzar cualquier excepción
         String method = joinPoint.getSignature().getName();
