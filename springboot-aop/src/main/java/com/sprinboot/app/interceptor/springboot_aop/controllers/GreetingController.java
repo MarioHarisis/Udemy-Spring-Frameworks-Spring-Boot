@@ -25,24 +25,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 public class GreetingController {
 
-    /*
-     * Spring busca automáticamente un bean (una instancia administrada por Spring)
-     * que coincida con el tipo de la variable y lo inyecta.
-     */
-    @Autowired
-    private GreetingService greetingService;
+  /*
+   * Spring busca automáticamente un bean (una instancia administrada por Spring)
+   * que coincida con el tipo de la variable y lo inyecta.
+   */
+  @Autowired
+  private GreetingService greetingService;
 
-    @GetMapping("/greeting")
-    public ResponseEntity<?> greeting() {
-        /*
-         * - ResponseEntity es una clase de Spring que se usa para devolver respuestas
-         * HTTP.
-         * - .ok(...) indica que la respuesta tendrá un código de estado 200 (OK)
-         * 
-         */
-        return ResponseEntity
-                .ok(Collections.singletonMap(
-                        "greeting",
-                        greetingService.sayHello("Pepe", "Hola que tal")));
-    }
+  @GetMapping("/greeting")
+  public ResponseEntity<?> greeting() {
+    /*
+     * - ResponseEntity es una clase de Spring que se usa para devolver respuestas
+     * HTTP.
+     * - .ok(...) indica que la respuesta tendrá un código de estado 200 (OK)
+     * 
+     */
+    return ResponseEntity
+        .ok(Collections.singletonMap(
+            "greeting",
+            greetingService.sayHello("Pepe", "Hola que tal")));
+  }
+
+  @GetMapping("/greeting-error")
+  public ResponseEntity<?> greetingError() {
+    return ResponseEntity
+        .ok(Collections.singletonMap(
+            "greeting",
+            greetingService.sayHelloError("Pepe", "Hola que tal")));
+  }
 }
